@@ -27,8 +27,6 @@ RUN git clone https://github.com/tdlib/td.git; \
 RUN apt remove -y \
     make \
     git \
-    zlib1g-dev \
-    libssl-dev \
     gperf \
     cmake \
     clang \
