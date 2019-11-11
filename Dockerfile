@@ -19,9 +19,8 @@ RUN git clone https://github.com/tdlib/td.git; \
     cd build; \
     export CXXFLAGS=""; \
     cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..; \
-    cmake --build . --target prepare_cross_compiling;
-
-RUN php SplitSource.php; \
+    cmake --build . --target prepare_cross_compiling; \
+    php SplitSource.php; \
     cd build; \
     cmake --build . --target install; \
     cd ..; \
