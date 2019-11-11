@@ -9,9 +9,7 @@ RUN apt update && apt install -y -qq \
     libssl-dev \
     gperf \
     cmake \
-    clang \
-    libc++-dev \
-    libc++abi-dev
+    g++
 
 # Begin compilation
 RUN git clone https://github.com/tdlib/td.git; \
@@ -19,7 +17,15 @@ RUN git clone https://github.com/tdlib/td.git; \
     rm -rf build; \
     mkdir build; \
     cd build; \
-    export CXXFLAGS="-stdlib=libc++"; \
-    CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..; \
-    cmake --build . --target install;
+    export CXXFLAGS=""; \
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..; \
+    cmake --build . --target prepare_cross_compiling;
+
+RUN php SplitSource.php; \
+    cd build; \
+    cmake --build . --target install; \
+    cd ..; \
+    php SplitSource.php --undo; \
+    cd ..; \
+    ls -l /usr/local;
 
