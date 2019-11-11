@@ -28,3 +28,10 @@ RUN git clone https://github.com/tdlib/td.git; \
     cd ..; \
     ls -l /usr/local;
 
+# Let's clean
+RUN apt-get remove -y \
+    php \
+    gperf \
+    cmake; \
+    apt-get autoremove -y; \
+    apt-get autoclean
