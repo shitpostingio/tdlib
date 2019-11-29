@@ -22,7 +22,7 @@ docker-build:
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t "registry.gitlab.com/shitposting/shitpostingolang:$CI_COMMIT_REF_SLUG" .
+    - docker build --pull -t "registry.gitlab.com/shitposting/tdlib:$CI_COMMIT_REF_SLUG" .
     - docker push "registry.gitlab.com/shitposting/tdlib:$CI_COMMIT_REF_SLUG"
   except:
     - master
