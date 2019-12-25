@@ -10,6 +10,7 @@ docker-build-master:
   script:
     - docker build --pull -t registry.gitlab.com/shitposting/tdlib .
     - docker push registry.gitlab.com/shitposting/tdlib
+    - curl -X POST -F token=$TRIGGER_REPO_TOKEN -F ref=master https://gitlab.com/api/v4/projects/13449838/trigger/pipeline
   only:
     - master
 
