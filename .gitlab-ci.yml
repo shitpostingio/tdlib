@@ -10,6 +10,16 @@ docker-build-master:
   script:
     - docker build --pull -t registry.gitlab.com/shitposting/tdlib .
     - docker push registry.gitlab.com/shitposting/tdlib
+  only:
+    - master
+    
+build-trigger:
+  image: debian:latest
+  stage: trigger
+  before_script:
+    - apt update
+    - apt install -y curl
+  script:
     - curl -X POST -F token=$TRIGGER_REPO_TOKEN -F ref=master https://gitlab.com/api/v4/projects/13449838/trigger/pipeline
   only:
     - master
