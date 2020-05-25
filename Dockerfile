@@ -1,7 +1,7 @@
 # Pull from debian 10 buster
 FROM debian:buster
 
-# Dependencies
+# Install dependencies
 RUN apt update && apt install -y -qq \
     make \
     git \
