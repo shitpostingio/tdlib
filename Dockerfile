@@ -9,7 +9,9 @@ RUN apt update && apt install -y -qq \
     libssl-dev \
     gperf \
     cmake \
-    g++
+    clang \
+    libc++-dev \
+    libc++abi-dev
 
 # Begin compilation
 RUN git clone https://github.com/tdlib/td.git; \
@@ -18,12 +20,8 @@ RUN git clone https://github.com/tdlib/td.git; \
     rm -rf build; \
     mkdir build; \
     cd build; \
-    export CXXFLAGS=""; \
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..; \
-    cmake --build . --target prepare_cross_compiling; \
-    cmake --build . --target install; \
-    cd ..; \
-    ls -l /usr/local;
+    CXXFLAGS="-stdlib=libc++" CC=/usr/bin/clang CXX=/usr/bin/clang++ cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=/usr/local ..; \
+    cmake --build . --target install;
 
 # Let's clean
 RUN apt-get remove -y \
