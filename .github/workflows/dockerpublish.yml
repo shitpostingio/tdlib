@@ -17,7 +17,7 @@ jobs:
         run: echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
 
       - name: Build image
-        run: docker build . --tag ghcr.io/shitpostingio/tdlib:latest --platform linux/arm64,linux/amd64
+        run: docker build . --tag ghcr.io/shitpostingio/tdlib:latest
 
       - name: Push image
         run: docker push ghcr.io/shitpostingio/tdlib:latest
