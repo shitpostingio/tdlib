@@ -14,7 +14,7 @@ RUN apt update && apt install -y -qq \
 # Begin compilation
 RUN git clone https://github.com/tdlib/td.git; \
     cd td; \
-    git checkout v1.7.0; \
+    git checkout 3ff9723722a88022e4698a5562c2f8901dec63fa; \
     rm -rf build; \
     mkdir build; \
     cd build; \
