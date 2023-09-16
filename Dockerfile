@@ -1,5 +1,5 @@
 # Pull from debian 10 buster
-FROM debian:buster
+FROM debian:bookworm
 
 # Install dependencies
 RUN apt update && apt install -y -qq \
@@ -14,7 +14,7 @@ RUN apt update && apt install -y -qq \
 # Begin compilation
 RUN git clone https://github.com/tdlib/td.git; \
     cd td; \
-    git checkout v1.7.0; \
+    git checkout v1.8.0; \
     rm -rf build; \
     mkdir build; \
     cd build; \
